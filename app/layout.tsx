@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Bayu Setra Maulana',
-  description: 'An full-stack developer with a passion for building web applications.',
+  description:
+    'An Full Stack Developer with a passion for creating innovative and efficient web applications. With expertise in both frontend and backend technologies, I strive to deliver seamless user experiences and robust solutions.',
 };
 
 export default function RootLayout({
