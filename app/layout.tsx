@@ -1,21 +1,25 @@
 import type { Metadata } from 'next';
+
 import { Geist, Geist_Mono } from 'next/font/google';
+
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
 import './globals.css';
+import { Providers } from './providers';
 
 const geistSans = Geist({
-  variable: '--font-geist-sans',
   subsets: ['latin'],
+  variable: '--font-geist-sans',
 });
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
   subsets: ['latin'],
+  variable: '--font-geist-mono',
 });
 
 export const metadata: Metadata = {
-  title: 'Bayu Setra Maulana',
-  description:
-    'An Full Stack Developer with a passion for creating innovative and efficient web applications. With expertise in both frontend and backend technologies, I strive to deliver seamless user experiences and robust solutions.',
+  description: 'Portfolio showcasing my projects and expertise',
+  title: 'Bayu Setra Maulana | Full Stack Developer',
 };
 
 export default function RootLayout({
@@ -24,8 +28,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      lang="en"
+      suppressHydrationWarning
+    >
+      <body className="flex min-h-screen flex-col bg-white text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-50">
+        <Providers>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </Providers>
+      </body>
     </html>
   );
 }
