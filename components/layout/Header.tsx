@@ -17,7 +17,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">
       <Container className="flex items-center justify-between py-4">
         <Link className="text-lg font-bold" href="/">
-          Bayu
+          Bayu Setra Maulana
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
