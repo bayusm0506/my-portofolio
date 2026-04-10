@@ -52,7 +52,8 @@ export default function Home() {
           <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
             I specialize in creating seamless user experiences and robust backend solutions. With
             expertise in both frontend and backend technologies, I deliver scalable applications
-            that solve real problems.
+            that solve real problems. Ask me about frontend and backend technologies, and how to
+            leverage modern JavaScript frameworks.
           </p>
 
           <div className="flex flex-wrap gap-3 pt-4">
