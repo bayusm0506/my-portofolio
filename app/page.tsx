@@ -1,8 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 
 import { Container } from '@/components/common/Container';
+import { MotionContainer } from '@/components/common/MotionContainer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { motion } from 'motion/react';
 
 export default function Home() {
   const featuredProjects = [
@@ -37,35 +41,56 @@ export default function Home() {
   return (
     <div className="space-y-20 py-16">
       {/* Hero Section */}
-      <Container className="space-y-8">
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Hi, I&apos;m Bayu Setra Maulana
-            </h1>
-            <p className="text-xl text-slate-600 dark:text-slate-400">
-              Full Stack Developer building modern web applications with JavaScript, React, and
-              Node.js
-            </p>
-          </div>
+      <MotionContainer variant="fadeInUp">
+        <Container className="space-y-8">
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <motion.h1
+                className="text-4xl font-bold tracking-tight sm:text-5xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                Hi, I&apos;m Bayu Setra Maulana
+              </motion.h1>
+              <motion.p
+                className="text-xl text-slate-600 dark:text-slate-400"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Full Stack Developer building modern web applications with JavaScript, React, and
+                Node.js
+              </motion.p>
+            </div>
 
-          <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
-            I specialize in creating seamless user experiences and robust backend solutions. With
-            expertise in both frontend and backend technologies, I deliver scalable applications
-            that solve real problems. Ask me about frontend and backend technologies, and how to
-            leverage modern JavaScript frameworks.
-          </p>
-
-          <div className="flex flex-wrap gap-3 pt-4">
-            <Button size="lg">
-              <Link href="/projects">View My Work</Link>
-            </Button>
-            <Button variant="outline" size="lg">
-              <Link href="/contact">Get In Touch</Link>
-            </Button>
+            <motion.p
+              className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              I specialize in creating seamless user experiences and robust backend solutions. With
+              expertise in both frontend and backend technologies, I deliver scalable applications
+              that solve real problems. Ask me about frontend and backend technologies, and how to
+              leverage modern JavaScript frameworks.
+            </motion.p>
+            <motion.div
+              className="flex flex-wrap gap-3 pt-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Button size="lg">
+                <Link href="/projects">View My Work</Link>
+              </Button>
+              <Button variant="outline" size="lg">
+                <Link href="/contact">Get In Touch</Link>
+              </Button>
+            </motion.div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </MotionContainer>
 
       {/* Featured Projects */}
       <Container className="space-y-8">
