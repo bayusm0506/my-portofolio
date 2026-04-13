@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import { AnimatedSkillsGrid } from '@/components/common/AnimatedSkillsGrid';
 import { Container } from '@/components/common/Container';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -107,7 +106,16 @@ export default function Home() {
           </p>
         </div>
 
-        <AnimatedSkillsGrid skills={skills} />
+        <div className="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <div
+              key={skill}
+              className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 dark:bg-slate-800 dark:text-slate-100"
+            >
+              {skill}
+            </div>
+          ))}
+        </div>
 
         <Button variant="outline" className="w-full sm:w-auto">
           <Link href="/skills">See Full Profile</Link>
