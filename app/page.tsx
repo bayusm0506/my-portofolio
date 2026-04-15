@@ -95,13 +95,30 @@ export default function Home() {
       {/* Featured Projects */}
       <Container className="space-y-8">
         <div>
-          <h2 className="text-3xl font-bold">Featured Projects</h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">
+          <motion.h2
+            className="text-3xl font-bold"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Featured Projects
+          </motion.h2>
+          <motion.p
+            className="mt-2 text-slate-600 dark:text-slate-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             A selection of my recent work and side projects
-          </p>
+          </motion.p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           {featuredProjects.map((project) => (
             <Card key={project.title} className="group hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -115,7 +132,7 @@ export default function Home() {
               </CardContent>
             </Card>
           ))}
-        </div>
+        </motion.div>
 
         <Button variant="outline" className="w-full sm:w-auto">
           <Link href="/projects">See All Projects</Link>
