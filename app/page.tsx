@@ -141,29 +141,43 @@ export default function Home() {
       </MotionContainer>
 
       {/* Skills Section */}
-      <Container className="space-y-8">
-        <div>
-          <h2 className="text-3xl font-bold">Skills & Technologies</h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">
-            Technologies I work with regularly
-          </p>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {skills.map((skill) => (
-            <div
-              key={skill}
-              className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 dark:bg-slate-800 dark:text-slate-100"
+      <MotionContainer variant="fadeInUp">
+        <Container className="space-y-8">
+          <div>
+            <motion.h2
+              className="text-3xl font-bold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              {skill}
-            </div>
-          ))}
-        </div>
+              Skills & Technologies
+            </motion.h2>
+            <motion.p
+              className="mt-2 text-slate-600 dark:text-slate-400"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Technologies I work with regularly
+            </motion.p>
+          </div>
 
-        <Button variant="outline" className="w-full sm:w-auto">
-          <Link href="/skills">See Full Profile</Link>
-        </Button>
-      </Container>
+          <div className="flex flex-wrap gap-2">
+            {skills.map((skill) => (
+              <div
+                key={skill}
+                className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 dark:bg-slate-800 dark:text-slate-100"
+              >
+                {skill}
+              </div>
+            ))}
+          </div>
+
+          <Button variant="outline" className="w-full sm:w-auto">
+            <Link href="/skills">See Full Profile</Link>
+          </Button>
+        </Container>
+      </MotionContainer>
 
       {/* CTA Section */}
       <Container className="space-y-8 rounded-lg border border-slate-200 bg-slate-50 p-12 dark:border-slate-800 dark:bg-slate-900">
