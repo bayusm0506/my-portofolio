@@ -200,37 +200,51 @@ export default function Home() {
       </Container>
 
       {/* Blog Preview */}
-      <Container className="space-y-8">
-        <div>
-          <h2 className="text-3xl font-bold">Latest Articles</h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">
-            Thoughts on web development and technology
-          </p>
-        </div>
+      <MotionContainer variant="fadeInUp">
+        <Container className="space-y-8">
+          <div>
+            <motion.h2
+              className="text-3xl font-bold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Latest Articles
+            </motion.h2>
+            <motion.p
+              className="mt-2 text-slate-600 dark:text-slate-400"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Thoughts on web development and technology
+            </motion.p>
+          </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {[1, 2].map((item) => (
-            <Card key={item} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle>Blog Post Title {item}</CardTitle>
-                <CardDescription>Published on April {item}, 2024</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4 text-sm text-slate-600 dark:text-slate-400">
-                  A brief excerpt of the blog post content goes here...
-                </p>
-                <Button variant="ghost" className="pl-0">
-                  <Link href="/blog">Read More →</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {[1, 2].map((item) => (
+              <Card key={item} className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <CardTitle>Blog Post Title {item}</CardTitle>
+                  <CardDescription>Published on April {item}, 2024</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4 text-sm text-slate-600 dark:text-slate-400">
+                    A brief excerpt of the blog post content goes here...
+                  </p>
+                  <Button variant="ghost" className="pl-0">
+                    <Link href="/blog">Read More →</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
 
-        <Button variant="outline" className="w-full sm:w-auto">
-          <Link href="/blog">Read All Articles</Link>
-        </Button>
-      </Container>
+          <Button variant="outline" className="w-full sm:w-auto">
+            <Link href="/blog">Read All Articles</Link>
+          </Button>
+        </Container>
+      </MotionContainer>
     </div>
   );
 }
