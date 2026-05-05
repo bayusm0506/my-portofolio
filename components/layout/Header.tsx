@@ -25,18 +25,24 @@ export function Header() {
           Bayu Setra Maulana
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Button key={item.href} className="text-sm" variant={isActive ? 'default' : 'ghost'}>
-                <Link href={item.href}>{item.label}</Link>
-              </Button>
-            );
-          })}
-        </nav>
+        <div className="flex items-center gap-4">
+          <nav className="hidden items-center gap-1 md:flex">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Button
+                  key={item.href}
+                  className="text-sm"
+                  variant={isActive ? 'default' : 'ghost'}
+                >
+                  <Link href={item.href}>{item.label}</Link>
+                </Button>
+              );
+            })}
+          </nav>
 
-        <ThemeToggle />
+          <ThemeToggle />
+        </div>
       </Container>
     </header>
   );
