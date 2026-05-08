@@ -6,10 +6,50 @@ import { MotionContainer } from '@/components/common/MotionContainer';
 import { MotionGrid } from '@/components/common/MotionGrid';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { projects } from '@/lib/projects';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+interface ProjectsData {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  longDescription: string;
+  image: string;
+  tags: string[];
+  link: string;
+  demo: string;
+}
 
 export default function Projects() {
+  const [projectsData, setProjectsData] = useState<ProjectsData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch projects data from API
+  useEffect(() => {
+    fetch('/api/projects')
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.success) {
+          setProjectsData(response.data);
+        } else {
+          console.error(response.message);
+        }
+      })
+      .catch((err) => console.error('Fetch failed:', err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <Container className="py-16">
+        <p className="text-center text-lg text-slate-600 dark:text-slate-400">
+          Loading projects...
+        </p>
+      </Container>
+    );
+  }
+
   return (
     <div className="space-y-12 py-16">
       <MotionContainer variant="fadeInUp">
@@ -25,7 +65,7 @@ export default function Projects() {
 
       <Container>
         <MotionGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {projectsData.map((project, index) => (
             <MotionCard key={project.slug} delay={index * 0.1}>
               <Link href={`/projects/${project.slug}`}>
                 <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer">
