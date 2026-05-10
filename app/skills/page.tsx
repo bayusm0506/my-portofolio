@@ -7,8 +7,27 @@ import { MotionGrid } from '@/components/common/MotionGrid';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { skillsByCategory } from '@/lib/skills';
+import { useEffect, useState } from 'react';
 
 export default function Skills() {
+  const [skillsData, setSkillsData] = useState(skillsByCategory);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch skills data from API
+  useEffect(() => {
+    fetch('/api/skills')
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.success) {
+          setSkillsData(response.data);
+        } else {
+          console.error(response.message);
+        }
+      })
+      .catch((err) => console.error('Fetch failed:', err))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div className="space-y-12 py-16">
       <MotionContainer variant="fadeInUp">
@@ -24,7 +43,7 @@ export default function Skills() {
 
       <Container>
         <div className="space-y-12">
-          {skillsByCategory.map((category, categoryIndex) => (
+          {skillsData.map((category, categoryIndex) => (
             <div key={category.name} className="space-y-4">
               <h2 className="text-2xl font-bold">{category.name}</h2>
               <MotionGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
