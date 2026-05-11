@@ -9,9 +9,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { skillsByCategory } from '@/lib/skills';
 import { useEffect, useState } from 'react';
 
+interface Skill {
+  name: string;
+  skills: Array<{
+    name: string;
+    level: string;
+  }>;
+}
+
 export default function Skills() {
-  const [skillsData, setSkillsData] = useState(skillsByCategory);
-  const [loading, setLoading] = useState(false);
+  const [skillsData, setSkillsData] = useState<Skill[]>(skillsByCategory);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Fetch skills data from API
   useEffect(() => {
