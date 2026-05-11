@@ -6,10 +6,39 @@ import { MotionContainer } from '@/components/common/MotionContainer';
 import { MotionGrid } from '@/components/common/MotionGrid';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { blogPosts } from '@/lib/blog';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+interface BlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  date: string;
+  tags: string[];
+  author: string;
+}
 
 export default function Blog() {
+  const [blogsData, setBlogsData] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  // Fetch blogs data from API
+  useEffect(() => {
+    fetch('/api/blog')
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.success) {
+          setBlogsData(response.data);
+        } else {
+          console.error(response.message);
+        }
+      })
+      .catch((err) => console.error('Fetch failed:', err))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div className="space-y-12 py-16">
       <MotionContainer variant="fadeInUp">
@@ -25,7 +54,7 @@ export default function Blog() {
 
       <Container>
         <MotionGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogPosts.map((post, index) => (
+          {blogsData.map((post, index) => (
             <MotionCard key={post.slug} delay={index * 0.1}>
               <Link href={`/blog/${post.slug}`}>
                 <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer">
