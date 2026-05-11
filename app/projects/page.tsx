@@ -23,7 +23,7 @@ interface ProjectsData {
 
 export default function Projects() {
   const [projectsData, setProjectsData] = useState<ProjectsData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // Fetch projects data from API
   useEffect(() => {
