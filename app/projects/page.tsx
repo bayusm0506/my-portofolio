@@ -4,6 +4,7 @@ import { Container } from '@/components/common/Container';
 import { MotionCard } from '@/components/common/MotionCard';
 import { MotionContainer } from '@/components/common/MotionContainer';
 import { MotionGrid } from '@/components/common/MotionGrid';
+import { ProjectSkeleton } from '@/components/common/ProjectSkeleton';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
@@ -42,11 +43,26 @@ export default function Projects() {
 
   if (loading) {
     return (
-      <Container className="py-16">
-        <p className="text-center text-lg text-slate-600 dark:text-slate-400">
-          Loading projects...
-        </p>
-      </Container>
+      <div className="space-y-12 py-16">
+        <MotionContainer variant="fadeInUp">
+          <Container>
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold">Projects</h1>
+              <p className="text-lg text-slate-600 dark:text-slate-400">
+                Exploring my latest work and experiments
+              </p>
+            </div>
+          </Container>
+        </MotionContainer>
+
+        <Container>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <ProjectSkeleton key={index} />
+            ))}
+          </div>
+        </Container>
+      </div>
     );
   }
 
