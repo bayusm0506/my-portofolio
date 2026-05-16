@@ -4,6 +4,7 @@ import { Container } from '@/components/common/Container';
 import { MotionCard } from '@/components/common/MotionCard';
 import { MotionContainer } from '@/components/common/MotionContainer';
 import { MotionGrid } from '@/components/common/MotionGrid';
+import { SkillSkeleton } from '@/components/common/SkillSkeleton';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { skillsByCategory } from '@/lib/skills';
@@ -19,7 +20,7 @@ interface Skill {
 
 export default function Skills() {
   const [skillsData, setSkillsData] = useState<Skill[]>(skillsByCategory);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // Fetch skills data from API
   useEffect(() => {
@@ -35,6 +36,31 @@ export default function Skills() {
       .catch((err) => console.error('Fetch failed:', err))
       .finally(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <div className="space-y-12 py-16">
+        <MotionContainer variant="fadeInUp">
+          <Container>
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold">Skills</h1>
+              <p className="text-lg text-slate-600 dark:text-slate-400">
+                Technologies and tools I work with
+              </p>
+            </div>
+          </Container>
+        </MotionContainer>
+
+        <Container>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <SkillSkeleton key={index} />
+            ))}
+          </div>
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-12 py-16">
