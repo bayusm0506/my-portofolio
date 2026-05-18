@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-interface ProjectsData {
+export interface ProjectsData {
   id: number;
   slug: string;
   title: string;

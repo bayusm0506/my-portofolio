@@ -18,3 +18,17 @@ export function ProjectSkeleton() {
     </Card>
   );
 }
+
+export function FeaturedProjectSkeleton() {
+  return (
+    <Card className="group hover:shadow-lg transition-shadow">
+      <CardHeader>
+        <Skeleton className="h-6 w-3/4 mb-2" />
+        <Skeleton className="h-4 w-full" />
+      </CardHeader>
+      <CardContent>
+        <Skeleton className="h-10 w-24" />
+      </CardContent>
+    </Card>
+  );
+}

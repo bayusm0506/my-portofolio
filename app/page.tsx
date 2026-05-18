@@ -4,28 +4,30 @@ import Link from 'next/link';
 
 import { Container } from '@/components/common/Container';
 import { MotionContainer } from '@/components/common/MotionContainer';
+import { FeaturedProjectSkeleton } from '@/components/common/ProjectSkeleton';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { ProjectsData } from './projects/page';
 
 export default function Home() {
-  const featuredProjects = [
-    {
-      description: 'A modern web application built with Next.js and TypeScript',
-      href: '#',
-      title: 'Project One',
-    },
-    {
-      description: 'Full-stack solution with real-time features',
-      href: '#',
-      title: 'Project Two',
-    },
-    {
-      description: 'Mobile-first responsive design showcase',
-      href: '#',
-      title: 'Project Three',
-    },
-  ];
+  const [featuredProjects, setFeaturedProjects] = useState<ProjectsData[]>([]);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+
+  // Fetch featured projects from API
+  useEffect(() => {
+    fetch('/api/projects')
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.success) {
+          // Get only the first 3 projects as featured
+          setFeaturedProjects(response.data.slice(0, 3));
+        }
+      })
+      .catch((err) => console.error('Fetch failed:', err))
+      .finally(() => setLoadingProjects(false));
+  }, []);
 
   const skills = [
     'React',
@@ -120,19 +122,21 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {featuredProjects.map((project) => (
-              <Card key={project.title} className="group hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
-                  <CardDescription>{project.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="ghost" className="w-full justify-start pl-0">
-                    <Link href={project.href}>View Project →</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+            {loadingProjects
+              ? Array.from({ length: 3 }).map((_, index) => <FeaturedProjectSkeleton key={index} />)
+              : featuredProjects.map((project) => (
+                  <Card key={project.title} className="group hover:shadow-lg transition-shadow">
+                    <CardHeader>
+                      <CardTitle>{project.title}</CardTitle>
+                      <CardDescription>{project.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button variant="ghost" className="w-full justify-start pl-0">
+                        <Link href={project.link}>View Project →</Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
           </motion.div>
           <Button variant="outline" className="w-full sm:w-auto">
             <Link href="/projects">See All Projects</Link>
