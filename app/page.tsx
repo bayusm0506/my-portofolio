@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Container } from '@/components/common/Container';
 import { MotionContainer } from '@/components/common/MotionContainer';
 import { FeaturedProjectSkeleton } from '@/components/common/ProjectSkeleton';
+import { SkillSkeleton } from '@/components/common/SkillSkeleton';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'motion/react';
@@ -14,6 +15,9 @@ import { ProjectsData } from './projects/page';
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<ProjectsData[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
+
+  const [skills, setSkills] = useState<string[]>([]);
+  const [loadingSkills, setLoadingSkills] = useState(true);
 
   // Fetch featured projects from API
   useEffect(() => {
@@ -29,7 +33,20 @@ export default function Home() {
       .finally(() => setLoadingProjects(false));
   }, []);
 
-  const skills = [
+  // Fetch skills
+  useEffect(() => {
+    fetch('/api/skills')
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.success) {
+          setSkills(response.data);
+        }
+      })
+      .catch((err) => console.error('Fetch failed:', err))
+      .finally(() => setLoadingSkills(false));
+  }, []);
+
+  const skillsData = [
     'React',
     'Next.js',
     'TypeScript',
@@ -166,16 +183,20 @@ export default function Home() {
             </motion.p>
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <div
-                key={skill}
-                className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 dark:bg-slate-800 dark:text-slate-100"
-              >
-                {skill}
-              </div>
-            ))}
-          </div>
+          {loadingSkills ? (
+            <SkillSkeleton />
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              {skillsData.map((skill) => (
+                <div
+                  key={skill}
+                  className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 dark:bg-slate-800 dark:text-slate-100"
+                >
+                  {skill}
+                </div>
+              ))}
+            </div>
+          )}
 
           <Button variant="outline" className="w-full sm:w-auto">
             <Link href="/skills">See Full Profile</Link>
