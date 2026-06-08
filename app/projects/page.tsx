@@ -7,8 +7,8 @@ import { MotionGrid } from '@/components/common/MotionGrid';
 import { ProjectSkeleton } from '@/components/common/ProjectSkeleton';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 export interface ProjectsData {
   id: number;
@@ -22,26 +22,22 @@ export interface ProjectsData {
   demo: string;
 }
 
+async function fetchProjects(): Promise<ProjectsData[]> {
+  const res = await fetch('/api/projects');
+  const response = await res.json();
+
+  if (!response.success) throw new Error(response.message);
+
+  return response.data;
+}
+
 export default function Projects() {
-  const [projectsData, setProjectsData] = useState<ProjectsData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { data: projectsData = [], isLoading } = useQuery({
+    queryKey: ['projects'],
+    queryFn: fetchProjects,
+  });
 
-  // Fetch projects data from API
-  useEffect(() => {
-    fetch('/api/projects')
-      .then((res) => res.json())
-      .then((response) => {
-        if (response.success) {
-          setProjectsData(response.data);
-        } else {
-          console.error(response.message);
-        }
-      })
-      .catch((err) => console.error('Fetch failed:', err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="space-y-12 py-16">
         <MotionContainer variant="fadeInUp">
