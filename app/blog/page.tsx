@@ -7,8 +7,8 @@ import { MotionContainer } from '@/components/common/MotionContainer';
 import { MotionGrid } from '@/components/common/MotionGrid';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 interface BlogPost {
   id: number;
@@ -21,26 +21,22 @@ interface BlogPost {
   author: string;
 }
 
+async function fetchBlogs(): Promise<BlogPost[]> {
+  const res = await fetch('/api/blog');
+  const response = await res.json();
+
+  if (!response.success) throw new Error(response.message);
+
+  return response.data;
+}
+
 export default function Blog() {
-  const [blogsData, setBlogsData] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { data: blogsData = [], isLoading } = useQuery({
+    queryKey: ['blogs'],
+    queryFn: fetchBlogs,
+  });
 
-  // Fetch blogs data from API
-  useEffect(() => {
-    fetch('/api/blog')
-      .then((res) => res.json())
-      .then((response) => {
-        if (response.success) {
-          setBlogsData(response.data);
-        } else {
-          console.error(response.message);
-        }
-      })
-      .catch((err) => console.error('Fetch failed:', err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="space-y-12 py-16">
         <MotionContainer variant="fadeInUp">
