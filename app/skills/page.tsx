@@ -7,8 +7,7 @@ import { MotionGrid } from '@/components/common/MotionGrid';
 import { SkillSkeleton } from '@/components/common/SkillSkeleton';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { skillsByCategory } from '@/lib/skills';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 interface Skill {
   name: string;
@@ -18,26 +17,22 @@ interface Skill {
   }>;
 }
 
+async function fetchSkills(): Promise<Skill[]> {
+  const res = await fetch('/api/skills');
+  const response = await res.json();
+
+  if (!response.success) throw new Error(response.message);
+
+  return response.data;
+}
+
 export default function Skills() {
-  const [skillsData, setSkillsData] = useState<Skill[]>(skillsByCategory);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { data: skillsData = [], isLoading } = useQuery({
+    queryKey: ['skills'],
+    queryFn: fetchSkills,
+  });
 
-  // Fetch skills data from API
-  useEffect(() => {
-    fetch('/api/skills')
-      .then((res) => res.json())
-      .then((response) => {
-        if (response.success) {
-          setSkillsData(response.data);
-        } else {
-          console.error(response.message);
-        }
-      })
-      .catch((err) => console.error('Fetch failed:', err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="space-y-12 py-16">
         <MotionContainer variant="fadeInUp">
