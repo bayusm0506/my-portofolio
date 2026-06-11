@@ -1,4 +1,4 @@
-import { projects } from '@/lib/projects';
+import { projects } from '@/mocks/projects';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {

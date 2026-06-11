@@ -1,4 +1,4 @@
-import { skillsByCategory } from '@/lib/skills';
+import { skillsByCategory } from '@/mocks/skills';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

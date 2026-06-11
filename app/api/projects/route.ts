@@ -1,4 +1,4 @@
-import { projects } from '@/lib/projects';
+import { projects } from '@/mocks/projects';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

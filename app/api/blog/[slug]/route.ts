@@ -1,4 +1,4 @@
-import { blogPosts } from '@/lib/blog';
+import { blogPosts } from '@/mocks/blog';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
