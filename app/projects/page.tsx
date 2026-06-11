@@ -7,29 +7,9 @@ import { MotionGrid } from '@/components/common/MotionGrid';
 import { ProjectSkeleton } from '@/components/common/ProjectSkeleton';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { fetchProjects } from '@/lib/services';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-
-export interface ProjectsData {
-  id: number;
-  slug: string;
-  title: string;
-  description: string;
-  longDescription: string;
-  image: string;
-  tags: string[];
-  link: string;
-  demo: string;
-}
-
-async function fetchProjects(): Promise<ProjectsData[]> {
-  const res = await fetch('/api/projects');
-  const response = await res.json();
-
-  if (!response.success) throw new Error(response.message);
-
-  return response.data;
-}
 
 export default function Projects() {
   const { data: projectsData = [], isLoading } = useQuery({
