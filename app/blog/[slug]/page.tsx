@@ -1,6 +1,6 @@
 import { Container } from '@/components/common/Container';
 import { Badge } from '@/components/ui/badge';
-import { blogPosts } from '@/lib/blog';
+import { blogPosts } from '@/mocks/blog';
 import Link from 'next/link';
 
 export default async function BlogDetail({ params }: { params: Promise<{ slug: string }> }) {

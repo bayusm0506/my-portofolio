@@ -1,7 +1,7 @@
 import { Container } from '@/components/common/Container';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { projects } from '@/lib/projects';
+import { projects } from '@/mocks/projects';
 import Link from 'next/link';
 
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
