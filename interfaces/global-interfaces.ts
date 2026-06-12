@@ -9,3 +9,22 @@ export interface ProjectsData {
   link: string;
   demo: string;
 }
+
+export interface BlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  date: string;
+  tags: string[];
+  author: string;
+}
+
+export interface Skill {
+  name: string;
+  skills: Array<{
+    name: string;
+    level: string;
+  }>;
+}

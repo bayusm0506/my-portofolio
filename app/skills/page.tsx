@@ -7,24 +7,8 @@ import { MotionGrid } from '@/components/common/MotionGrid';
 import { SkillSkeleton } from '@/components/common/SkillSkeleton';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { fetchSkills } from '@/lib/services';
 import { useQuery } from '@tanstack/react-query';
-
-interface Skill {
-  name: string;
-  skills: Array<{
-    name: string;
-    level: string;
-  }>;
-}
-
-async function fetchSkills(): Promise<Skill[]> {
-  const res = await fetch('/api/skills');
-  const response = await res.json();
-
-  if (!response.success) throw new Error(response.message);
-
-  return response.data;
-}
 
 export default function Skills() {
   const { data: skillsData = [], isLoading } = useQuery({

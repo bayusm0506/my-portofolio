@@ -7,28 +7,9 @@ import { MotionContainer } from '@/components/common/MotionContainer';
 import { MotionGrid } from '@/components/common/MotionGrid';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { fetchBlogs } from '@/lib/services';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-
-interface BlogPost {
-  id: number;
-  slug: string;
-  title: string;
-  description: string;
-  content: string;
-  date: string;
-  tags: string[];
-  author: string;
-}
-
-async function fetchBlogs(): Promise<BlogPost[]> {
-  const res = await fetch('/api/blog');
-  const response = await res.json();
-
-  if (!response.success) throw new Error(response.message);
-
-  return response.data;
-}
 
 export default function Blog() {
   const { data: blogsData = [], isLoading } = useQuery({
