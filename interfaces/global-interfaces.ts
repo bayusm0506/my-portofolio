@@ -20,3 +20,11 @@ export interface BlogPost {
   tags: string[];
   author: string;
 }
+
+export interface Skill {
+  name: string;
+  skills: Array<{
+    name: string;
+    level: string;
+  }>;
+}
