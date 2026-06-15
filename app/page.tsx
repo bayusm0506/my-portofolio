@@ -8,30 +8,19 @@ import { FeaturedProjectSkeleton } from '@/components/common/ProjectSkeleton';
 import { SkillSkeleton } from '@/components/common/SkillSkeleton';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { fetchProjects } from '@/lib/services';
+import { useQuery } from '@tanstack/react-query';
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { ProjectsData } from './projects/page';
 
 export default function Home() {
-  const [featuredProjects, setFeaturedProjects] = useState<ProjectsData[]>([]);
-  const [loadingProjects, setLoadingProjects] = useState(true);
-
   const [skills, setSkills] = useState<string[]>([]);
   const [loadingSkills, setLoadingSkills] = useState(true);
 
-  // Fetch featured projects from API
-  useEffect(() => {
-    fetch('/api/projects')
-      .then((res) => res.json())
-      .then((response) => {
-        if (response.success) {
-          // Get only the first 3 projects as featured
-          setFeaturedProjects(response.data.slice(0, 3));
-        }
-      })
-      .catch((err) => console.error('Fetch failed:', err))
-      .finally(() => setLoadingProjects(false));
-  }, []);
+  const { data: featuredProjects = [], isLoading: isLoadingProjects } = useQuery({
+    queryKey: ['projects'],
+    queryFn: fetchProjects,
+  });
 
   // Fetch skills
   useEffect(() => {
@@ -139,7 +128,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {loadingProjects
+            {isLoadingProjects
               ? Array.from({ length: 3 }).map((_, index) => <FeaturedProjectSkeleton key={index} />)
               : featuredProjects.map((project) => (
                   <Card key={project.title} className="group hover:shadow-lg transition-shadow">
