@@ -8,43 +8,24 @@ import { FeaturedProjectSkeleton } from '@/components/common/ProjectSkeleton';
 import { SkillSkeleton } from '@/components/common/SkillSkeleton';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { fetchProjects } from '@/lib/services';
+import { fetchProjects, fetchSkills } from '@/lib/services';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'motion/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Home() {
   const [skills, setSkills] = useState<string[]>([]);
   const [loadingSkills, setLoadingSkills] = useState(true);
 
-  const { data: featuredProjects = [], isLoading: isLoadingProjects } = useQuery({
+  const { data: projectsData = [], isLoading: isLoadingProjects } = useQuery({
     queryKey: ['projects'],
     queryFn: fetchProjects,
   });
 
-  // Fetch skills
-  useEffect(() => {
-    fetch('/api/skills')
-      .then((res) => res.json())
-      .then((response) => {
-        if (response.success) {
-          setSkills(response.data);
-        }
-      })
-      .catch((err) => console.error('Fetch failed:', err))
-      .finally(() => setLoadingSkills(false));
-  }, []);
-
-  const skillsData = [
-    'React',
-    'Next.js',
-    'TypeScript',
-    'Tailwind CSS',
-    'Node.js',
-    'PostgreSQL',
-    'JavaScript',
-    'REST APIs',
-  ];
+  const { data: skillsData = [], isLoading: isLoadingSkills } = useQuery({
+    queryKey: ['skills'],
+    queryFn: fetchSkills,
+  });
 
   return (
     <div className="space-y-20 py-16">
@@ -130,7 +111,7 @@ export default function Home() {
           >
             {isLoadingProjects
               ? Array.from({ length: 3 }).map((_, index) => <FeaturedProjectSkeleton key={index} />)
-              : featuredProjects.map((project) => (
+              : projectsData.map((project) => (
                   <Card key={project.title} className="group hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <CardTitle>{project.title}</CardTitle>
@@ -172,16 +153,16 @@ export default function Home() {
             </motion.p>
           </div>
 
-          {loadingSkills ? (
+          {isLoadingSkills ? (
             <SkillSkeleton />
           ) : (
             <div className="flex flex-wrap gap-2">
-              {skillsData.map((skill) => (
+              {skillsData.map((skill, index) => (
                 <div
-                  key={skill}
+                  key={index}
                   className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 dark:bg-slate-800 dark:text-slate-100"
                 >
-                  {skill}
+                  {skill.name}
                 </div>
               ))}
             </div>
