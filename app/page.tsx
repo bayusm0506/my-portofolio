@@ -11,12 +11,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { fetchProjects, fetchSkills } from '@/lib/services';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'motion/react';
-import { useState } from 'react';
 
 export default function Home() {
-  const [skills, setSkills] = useState<string[]>([]);
-  const [loadingSkills, setLoadingSkills] = useState(true);
-
   const { data: projectsData = [], isLoading: isLoadingProjects } = useQuery({
     queryKey: ['projects'],
     queryFn: fetchProjects,
@@ -40,7 +36,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                Hi, I&apos;m Bayu Setra Maulana
+                Hi, I&apos;m Bayu
               </motion.h1>
               <motion.p
                 className="text-xl text-slate-600 dark:text-slate-400"
@@ -48,8 +44,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Full Stack Developer building modern web applications with JavaScript, React, and
-                Node.js
+                Software Engineer (React, Next.js, TypeScript) | Full-Stack | Open to Remote
               </motion.p>
             </div>
 
@@ -59,10 +54,10 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              I specialize in creating seamless user experiences and robust backend solutions. With
-              expertise in both frontend and backend technologies, I deliver scalable applications
-              that solve real problems. Ask me about frontend and backend technologies, and how to
-              leverage modern JavaScript frameworks.
+              I am a software engineer with 3 years of frontend experience and 2 years of backend
+              experience. Skilled in React.js, Next.js, TypeScript, Node.js (Fastify/Express),
+              MongoDB, and PostgreSQL. I enjoy building solutions that improve performance and
+              scalability. I&apos;m seeking global opportunities to collaborate with diverse teams
             </motion.p>
             <motion.div
               className="flex flex-wrap gap-3 pt-4"
