@@ -1,13 +1,31 @@
 export const projects = [
   {
     id: 1,
-    slug: 'project-one',
-    title: 'Project One',
-    description: 'A modern web application built with Next.js',
-    longDescription:
-      'A comprehensive web application showcasing modern Next.js practices with TypeScript, Tailwind CSS, and responsive design patterns.',
+    slug: 'shipment-couriers-integration',
+    title: 'Shipment Couriers Integration',
+    description:
+      'Developed and scaled a Courier Delivery Integration system to support end-to-end shipping operations across multiple logistics partners. The system enables seamless processes starting from rate checking, shipment booking, tracking, and cancellation, ensuring a reliable and consistent integration layer between internal platforms and third-party courier services.',
+    longDescription: `
+        Developed and scaled a Courier Delivery Integration system to support end-to-end shipping operations across multiple logistics partners. The system enables seamless processes starting from rate checking, shipment booking, tracking, and cancellation, ensuring a reliable and consistent integration layer between internal platforms and third-party courier services.
+        Key contributions included designing a flexible integration architecture to support onboarding of new courier partners with minimal changes, validating shipment constraints such as weight limits, and ensuring all outbound payloads—including insurance data—are accurate and aligned with client requirements. Implemented district mapping between courier services and internal systems to maintain consistency in delivery coverage and pricing.
+
+        Enhanced cross-platform compatibility by enabling shipping cost visibility across platforms such as WooCommerce, Shopify, and Jubelio omnichannel. Additionally, supported API consumers by ensuring robust documentation and reliable service performance for external client integrations. 
+        Built internal tools to improve operational efficiency, including shipment (AWB) monitoring dashboards, courier configuration management (enable/disable), promotional campaign setup for couriers, and claim management workflows for lost shipments. Also implemented announcement features to communicate important updates to sellers and clients directly through the system.
+      `,
     image: '/images/project-one.jpg',
-    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind'],
+    tags: [
+      'Next.js',
+      'Fastify',
+      'MongoDB',
+      'PostgreSQL',
+      'RabbitMQ',
+      'Kafka',
+      'Redis',
+      'Kibana',
+      'Grafana',
+      'GitHub',
+      'CI/CD',
+    ],
     link: 'https://github.com/yourusername/project-one',
     demo: 'https://project-one-demo.com',
   },
