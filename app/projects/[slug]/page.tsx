@@ -1,6 +1,7 @@
 import { Container } from '@/components/common/Container';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import Markdown from '@/components/ui/markdown';
 import { projects } from '@/mocks/projects';
 import Link from 'next/link';
 
@@ -21,7 +22,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               <Badge key={tag}>{tag}</Badge>
             ))}
           </div>
-          <p className="text-xl text-slate-700 dark:text-slate-300">{project.longDescription}</p>
+          <Markdown>{project.longDescription}</Markdown>
           <div className="flex gap-4 pt-6">
             {project.link && (
               <Button>
