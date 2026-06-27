@@ -1,4 +1,8 @@
-import { pbbPaymentSystem, shipmentCouriersIntegration } from './descriptions';
+import {
+  localTaxManagementSystem,
+  pbbPaymentSystem,
+  shipmentCouriersIntegration,
+} from './descriptions';
 
 export const projects = [
   {
@@ -39,13 +43,13 @@ export const projects = [
   },
   {
     id: 3,
-    slug: 'project-three',
-    title: 'Project Three',
-    description: 'Mobile-first responsive design showcase',
-    longDescription:
-      'A mobile-first responsive web application demonstrating advanced CSS techniques and progressive enhancement principles for cross-device compatibility.',
+    slug: 'local-tax-management-system',
+    title: 'Local Tax Management System',
+    description:
+      'Contributed to the enhancement and customization of an existing local tax management system covering multiple tax types, including Hotel Tax, Mineral Water Tax, Advertising Tax, and other regional taxes.',
+    longDescription: localTaxManagementSystem,
     image: '/images/project-three.jpg',
-    tags: ['CSS', 'JavaScript', 'Responsive', 'Mobile'],
+    tags: ['MySQL', 'Yii Framework (PHP)', 'Bootstrap'],
     link: 'https://github.com/yourusername/project-three',
     demo: 'https://project-three-demo.com',
   },
