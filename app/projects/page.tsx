@@ -8,6 +8,7 @@ import { ProjectSkeleton } from '@/components/common/ProjectSkeleton';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchProjects } from '@/lib/services';
+import { truncateText } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 
@@ -63,7 +64,7 @@ export default function Projects() {
                 <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer">
                   <CardHeader>
                     <CardTitle>{project.title}</CardTitle>
-                    <CardDescription>{project.description}</CardDescription>
+                    <CardDescription>{truncateText(project.description, 80)}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex flex-wrap gap-2">
