@@ -9,6 +9,7 @@ import { SkillSkeleton } from '@/components/common/SkillSkeleton';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchProjects, fetchSkills } from '@/lib/services';
+import { truncateText } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'motion/react';
 
@@ -110,7 +111,7 @@ export default function Home() {
                   <Card key={project.title} className="group hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <CardTitle>{project.title}</CardTitle>
-                      <CardDescription>{project.description}</CardDescription>
+                      <CardDescription>{truncateText(project.description, 80)}</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <Button variant="ghost" className="w-full justify-start pl-0">

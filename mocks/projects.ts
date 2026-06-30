@@ -26,8 +26,8 @@ export const projects = [
       'GitHub',
       'CI/CD',
     ],
-    link: 'https://github.com/yourusername/project-one',
-    demo: 'https://project-one-demo.com',
+    link: '/projects/shipment-couriers-integration',
+    demo: '/projects/shipment-couriers-integration',
   },
   {
     id: 2,
@@ -38,8 +38,8 @@ export const projects = [
     longDescription: pbbPaymentSystem,
     image: '/images/project-two.jpg',
     tags: ['Oracle Database', 'Yii Framework', 'Bootstrap'],
-    link: 'https://github.com/yourusername/project-two',
-    demo: 'https://project-two-demo.com',
+    link: '/projects/pbb-payment-system',
+    demo: '/projects/pbb-payment-system',
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ export const projects = [
     longDescription: localTaxManagementSystem,
     image: '/images/project-three.jpg',
     tags: ['MySQL', 'Yii Framework (PHP)', 'Bootstrap'],
-    link: 'https://github.com/yourusername/project-three',
-    demo: 'https://project-three-demo.com',
+    link: '/projects/local-tax-management-system',
+    demo: '/projects/local-tax-management-system',
   },
 ];
