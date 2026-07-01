@@ -26,5 +26,6 @@ export interface Skill {
   skills: Array<{
     name: string;
     level: string;
+    icon: string;
   }>;
 }

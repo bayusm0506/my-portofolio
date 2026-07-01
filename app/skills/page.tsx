@@ -9,12 +9,20 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchSkills } from '@/lib/services';
 import { useQuery } from '@tanstack/react-query';
+import * as LucideIcons from 'lucide-react';
 
 export default function Skills() {
   const { data: skillsData = [], isLoading } = useQuery({
     queryKey: ['skills'],
     queryFn: fetchSkills,
   });
+
+  const getIcon = (iconName: string) => {
+    const Icon = LucideIcons[iconName as keyof typeof LucideIcons] as React.ComponentType<{
+      className: string;
+    }>;
+    return Icon ? <Icon className="w-8 h-8" /> : null;
+  };
 
   if (isLoading) {
     return (
@@ -64,7 +72,12 @@ export default function Skills() {
                   <MotionCard key={skill.name} delay={categoryIndex * 0.1 + skillIndex * 0.05}>
                     <Card className="h-full">
                       <CardHeader>
-                        <CardTitle className="text-lg">{skill.name}</CardTitle>
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="text-slate-600 dark:text-slate-400">
+                            {getIcon(skill.icon)}
+                          </div>
+                          <CardTitle className="text-lg">{skill.name}</CardTitle>
+                        </div>
                       </CardHeader>
                       <CardContent>
                         <Badge variant="secondary">{skill.level}</Badge>
