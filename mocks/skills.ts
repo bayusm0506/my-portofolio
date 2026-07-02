@@ -1,6 +1,7 @@
 export const skillsByCategory = [
   {
     name: 'Frontend',
+    icon: 'Monitor',
     skills: [
       { name: 'React', level: 'Expert', icon: 'Code' },
       { name: 'Next.js', level: 'Expert', icon: 'Zap' },
@@ -13,6 +14,7 @@ export const skillsByCategory = [
   },
   {
     name: 'Backend',
+    icon: 'Server',
     skills: [
       { name: 'Node.js', level: 'Advanced', icon: 'Server' },
       { name: 'Express', level: 'Advanced', icon: 'Network' },
@@ -23,6 +25,7 @@ export const skillsByCategory = [
   },
   {
     name: 'Tools & Others',
+    icon: 'Wrench',
     skills: [
       { name: 'Git', level: 'Expert', icon: 'GitBranch' },
       { name: 'Docker', level: 'Intermediate', icon: 'Container' },

@@ -11,18 +11,18 @@ import { fetchSkills } from '@/lib/services';
 import { useQuery } from '@tanstack/react-query';
 import * as LucideIcons from 'lucide-react';
 
+export const getIcon = (iconName: string) => {
+  const Icon = LucideIcons[iconName as keyof typeof LucideIcons] as React.ComponentType<{
+    className: string;
+  }>;
+  return Icon ? <Icon className="w-8 h-8" /> : null;
+};
+
 export default function Skills() {
   const { data: skillsData = [], isLoading } = useQuery({
     queryKey: ['skills'],
     queryFn: fetchSkills,
   });
-
-  const getIcon = (iconName: string) => {
-    const Icon = LucideIcons[iconName as keyof typeof LucideIcons] as React.ComponentType<{
-      className: string;
-    }>;
-    return Icon ? <Icon className="w-8 h-8" /> : null;
-  };
 
   if (isLoading) {
     return (

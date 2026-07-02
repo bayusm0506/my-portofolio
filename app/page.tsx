@@ -12,6 +12,7 @@ import { fetchProjects, fetchSkills } from '@/lib/services';
 import { truncateText } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'motion/react';
+import { getIcon } from './skills/page';
 
 export default function Home() {
   const { data: projectsData = [], isLoading: isLoadingProjects } = useQuery({
@@ -153,19 +154,25 @@ export default function Home() {
             <SkillSkeleton />
           ) : (
             <div className="flex flex-wrap gap-2">
-              {skillsData.map((skill, index) => (
-                <div
-                  key={index}
-                  className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 dark:bg-slate-800 dark:text-slate-100"
-                >
-                  {skill.name}
-                </div>
+              {skillsData.map((category, index) => (
+                <Card key={category.name} className="group hover:shadow-lg transition-shadow">
+                  <CardHeader className="flex items-center justify-center">
+                    <div className="flex items-center gap-3">
+                      <div className="text-slate-600 dark:text-slate-400">
+                        {getIcon(category.icon)}
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <CardTitle>{category.name}</CardTitle>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           )}
 
           <Button variant="outline" className="w-full sm:w-auto">
-            <Link href="/skills">See Full Profile</Link>
+            <Link href="/skills">See Full Skills</Link>
           </Button>
         </Container>
       </MotionContainer>

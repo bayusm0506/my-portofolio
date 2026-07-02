@@ -23,6 +23,7 @@ export interface BlogPost {
 
 export interface Skill {
   name: string;
+  icon: string;
   skills: Array<{
     name: string;
     level: string;
