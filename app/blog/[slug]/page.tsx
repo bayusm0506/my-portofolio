@@ -1,5 +1,6 @@
 import { Container } from '@/components/common/Container';
 import { Badge } from '@/components/ui/badge';
+import Markdown from '@/components/ui/markdown';
 import { blogPosts } from '@/mocks/blog';
 import Link from 'next/link';
 
@@ -24,7 +25,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
             <p className="text-sm text-slate-500">{post.date}</p>
           </div>
           <div className="prose dark:prose-invert max-w-none">
-            <p className="text-lg text-slate-700 dark:text-slate-300">{post.content}</p>
+            <Markdown>{post.content}</Markdown>
           </div>
         </div>
       </Container>
