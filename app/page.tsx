@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 
+import { BlogSkeleton } from '@/components/common/BlogSkeleton';
 import { Container } from '@/components/common/Container';
 import { MotionContainer } from '@/components/common/MotionContainer';
 import { FeaturedProjectSkeleton } from '@/components/common/ProjectSkeleton';
 import { SkillSkeleton } from '@/components/common/SkillSkeleton';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { fetchProjects, fetchSkills } from '@/lib/services';
+import { fetchBlogs, fetchProjects, fetchSkills } from '@/lib/services';
 import { truncateText } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'motion/react';
@@ -23,6 +24,11 @@ export default function Home() {
   const { data: skillsData = [], isLoading: isLoadingSkills } = useQuery({
     queryKey: ['skills'],
     queryFn: fetchSkills,
+  });
+
+  const { data: blogsData = [], isLoading: isLoadingBlogs } = useQuery({
+    queryKey: ['blogs'],
+    queryFn: fetchBlogs,
   });
 
   return (
@@ -219,24 +225,28 @@ export default function Home() {
             </motion.p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {[1, 2].map((item) => (
-              <Card key={item} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle>Blog Post Title {item}</CardTitle>
-                  <CardDescription>Published on April {item}, 2024</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-4 text-sm text-slate-600 dark:text-slate-400">
-                    A brief excerpt of the blog post content goes here...
-                  </p>
-                  <Button variant="ghost" className="pl-0">
-                    <Link href="/blog">Read More →</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {isLoadingBlogs ? (
+            <BlogSkeleton />
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2">
+              {blogsData.map((blog) => (
+                <Card key={blog.id} className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle>{blog.title}</CardTitle>
+                    <CardDescription>Published on {blog.date}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="mb-4 text-sm text-slate-600 dark:text-slate-400">
+                      {blog.description}
+                    </p>
+                    <Button variant="ghost" className="pl-0">
+                      <Link href="/blog">Read More →</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
 
           <Button variant="outline" className="w-full sm:w-auto">
             <Link href="/blog">Read All Articles</Link>
