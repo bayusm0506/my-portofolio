@@ -160,7 +160,7 @@ export default function Home() {
             <SkillSkeleton />
           ) : (
             <div className="flex flex-wrap gap-2">
-              {skillsData.map((category, index) => (
+              {skillsData.map((category) => (
                 <Card key={category.name} className="group hover:shadow-lg transition-shadow">
                   <CardHeader className="flex items-center justify-center">
                     <div className="flex items-center gap-3">
