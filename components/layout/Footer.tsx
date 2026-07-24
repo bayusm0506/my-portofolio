@@ -45,7 +45,9 @@ export function Footer() {
               <li>
                 <a
                   className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
-                  href="#"
+                  href="https://github.com/bayusm0506"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   GitHub
                 </a>
@@ -53,15 +55,9 @@ export function Footer() {
               <li>
                 <a
                   className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
-                  href="#"
-                >
-                  Twitter
-                </a>
-              </li>
-              <li>
-                <a
-                  className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
-                  href="#"
+                  href="https://www.linkedin.com/in/bayu-setra-maulana"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   LinkedIn
                 </a>
@@ -71,7 +67,9 @@ export function Footer() {
 
           <div>
             <h3 className="mb-4 font-semibold text-slate-900 dark:text-slate-100">Contact</h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400">your.email@example.com</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">
+              bayu.setramaulana@gmail.com
+            </p>
           </div>
         </div>
 
